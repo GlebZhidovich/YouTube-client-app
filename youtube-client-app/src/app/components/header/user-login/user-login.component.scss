@@ -1,0 +1,21 @@
+.user-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__title {
+    margin: {
+      bottom: 0;
+      right: 10px;
+    };
+    user-select: none;
+  }
+
+  &__img {
+    cursor: pointer;
+
+    & svg{
+      vertical-align: middle;
+    }
+  }
+}

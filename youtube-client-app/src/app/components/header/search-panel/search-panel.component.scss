@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-panel,
+.user-login {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.search-panel {
+
+  .play-btn,
+  .setting-btn {
+    cursor: pointer;
+  }
+
+  .play-btn,
+  .search-field,
+  .search-btn,
+  .setting-btn {
+    margin-right: 20px;
+  }
+
+  .search-field {
+    width: 50%;
+  }
+
+  .setting-btn svg{
+    vertical-align: middle;
+  }
+}
