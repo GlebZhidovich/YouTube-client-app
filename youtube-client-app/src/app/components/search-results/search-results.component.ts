@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import * as data from '../../../shared/data.json';
-import { Video } from '../../models/search-response.model';
+import { IVideo } from '../../models/search-response.model';
 
 interface IJson {
   default: {
-	items: Video[];
+	items: IVideo[];
   };
 }
 
@@ -15,7 +15,7 @@ interface IJson {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchResultsComponent implements OnInit {
-  public videosData: Video[];
+  public videosData: IVideo[];
 
   public ngOnInit(): void {
 	this.videosData = (data as unknown as IJson).default.items;
