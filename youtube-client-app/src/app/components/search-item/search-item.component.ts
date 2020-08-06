@@ -1,20 +1,22 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Snippet, Statistics } from '../../models/search-item.model';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ISnippet, IStatistics } from '../../models/search-item.model';
+import { IVideo } from '../../models/search-response.model';
 
 @Component({
   selector: 'app-search-item',
   templateUrl: './search-item.component.html',
-  styleUrls: ['./search-item.component.scss']
+  styleUrls: ['./search-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchItemComponent implements OnInit {
 
-  @Input() videoData: any;
+  @Input() public videoData: IVideo;
 
-  public statistics: Statistics;
-  public snippet: Snippet;
+  public statistics: IStatistics;
+  public snippet: ISnippet;
 
-  ngOnInit(): void {
-    this.statistics = this.videoData.statistics;
-    this.snippet = this.videoData.snippet;
+  public ngOnInit(): void {
+	this.statistics = this.videoData.statistics;
+	this.snippet = this.videoData.snippet;
   }
 }
