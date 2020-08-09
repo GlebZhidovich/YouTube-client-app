@@ -9,4 +9,5 @@ export interface IStatistics {
 export interface ISnippet {
   thumbnails: { medium: { url: string } };
   title: string;
+  publishedAt: string;
 }

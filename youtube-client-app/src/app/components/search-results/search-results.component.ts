@@ -29,6 +29,7 @@ export class SearchResultsComponent implements OnChanges {
 
   public setVideosData(name: IVideo[]): void {
   this.videosData = (data as unknown as IJson).default.items;
+	// .filter((el: IVideo, i: number): boolean => i === 0,);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
