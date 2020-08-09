@@ -1,2 +1,2 @@
-<app-header></app-header>
-<app-search-results></app-search-results>
+<app-header (getVideoName)="getName($event)"></app-header>
+<app-search-results [videoName]="videoName"></app-search-results>

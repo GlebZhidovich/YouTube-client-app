@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +7,14 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
+
+  @Output() public getVideoName: EventEmitter<string> = new EventEmitter<string>();
+
   constructor(private cdr: ChangeDetectorRef) {
 
+  }
+
+  public getName(name: string): void {
+  this.getVideoName.emit(name);
   }
 }

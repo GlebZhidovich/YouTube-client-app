@@ -6,15 +6,18 @@
     </div>
 
     <mat-form-field class="search-field">
-      <input matInput placeholder="Name">
+      <input #search matInput placeholder="Name">
     </mat-form-field>
 
-    <button class="search-btn" mat-raised-button>Search</button>
+    <button class="search-btn" (click)="searchVideo()" mat-raised-button>Search</button>
 
-    <div class="setting-btn">
+    <div class="setting-btn" (click)="isFilterShow()">
       <img src="assets/img/search_settings.svg" alt="settings">
     </div>
 
   </div>
-  <app-sort-panel></app-sort-panel>
+  <ng-container *ngIf="isFilter">
+    <app-sort-panel></app-sort-panel>
+  </ng-container>
+
 </div>
