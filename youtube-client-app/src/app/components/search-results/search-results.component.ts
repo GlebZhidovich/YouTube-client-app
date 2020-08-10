@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import * as data from '../../../shared/data.json';
 import { IVideo } from '../../models/search-response.model';
+import { SortService } from './sort.service';
 
 interface IJson {
   default: {
@@ -20,10 +21,14 @@ interface IJson {
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
+  providers: [SortService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchResultsComponent implements OnChanges {
   public videosData: IVideo[];
+
+  constructor(private ss: SortService) {
+  }
 
   @Input() public videoName: string;
   @Input() public sort: string;
@@ -33,27 +38,9 @@ export class SearchResultsComponent implements OnChanges {
   }
 
   public sortBy(name: string): void {
-	if (name) {
-  if (name.includes('date')) {
-	this.videosData
-		.sort((a: IVideo, b: IVideo): number => {
-		  if (name.includes('Up')) {
-		return new Date(a.snippet.publishedAt).valueOf() - new Date(b.snippet.publishedAt).valueOf();
-		} else {
-		return new Date(b.snippet.publishedAt).valueOf() - new Date(a.snippet.publishedAt).valueOf();
-		}
-	});
-  } else {
-  this.videosData
-	.sort((a: IVideo, b: IVideo): number => {
-		if (name.includes('Up')) {
-		return parseInt(a.statistics.viewCount, 10) - parseInt(b.statistics.viewCount, 10);
-		} else {
-		return parseInt(b.statistics.viewCount, 10) - parseInt(a.statistics.viewCount, 10);
-		}
-  });
-	}
-   }
+  if (name) {
+  this.videosData = this.ss.sort(name, this.videosData);
+  }
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -66,7 +53,9 @@ export class SearchResultsComponent implements OnChanges {
   }
   }
   if (name === 'videoName') {
-  if (data.currentValue) { this.setVideosData(data.currentValue); }
+  if (data.currentValue) {
+	this.setVideosData(data.currentValue);
+  }
   }
   });
   }
