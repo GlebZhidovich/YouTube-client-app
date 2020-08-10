@@ -4,10 +4,10 @@
     <p class="sort-panel__title">Sorting by:</p>
 
     <ul class="sort-panel__list">
-      <li class="sort-panel__item selected">
+      <li (click)="sortBy('date')" class="sort-panel__item selected">
         date
       </li>
-      <li class="sort-panel__item selected">
+      <li (click)="sortBy('view')" class="sort-panel__item selected">
         count of view
       </li>
       <li class="sort-panel__item">

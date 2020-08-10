@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Ou
 export class HeaderComponent {
 
   @Output() public getVideoName: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public sb: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private cdr: ChangeDetectorRef) {
 
@@ -17,4 +18,9 @@ export class HeaderComponent {
   public getName(name: string): void {
   this.getVideoName.emit(name);
   }
+
+  public sortBy(type: string): void {
+	this.sb.emit(type);
+  }
+
 }

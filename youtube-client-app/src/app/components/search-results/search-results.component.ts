@@ -26,16 +26,45 @@ export class SearchResultsComponent implements OnChanges {
   public videosData: IVideo[];
 
   @Input() public videoName: string;
+  @Input() public sort: string;
 
-  public setVideosData(name: IVideo[]): void {
+  public setVideosData(name: string): void {
   this.videosData = (data as unknown as IJson).default.items;
-	// .filter((el: IVideo, i: number): boolean => i === 0,);
+  }
+
+  public sortBy(name: string): void {
+	if (name) {
+  if (name.includes('date')) {
+	this.videosData
+		.sort((a: IVideo, b: IVideo): number => {
+		  if (name.includes('Up')) {
+		return new Date(a.snippet.publishedAt).valueOf() - new Date(b.snippet.publishedAt).valueOf();
+		} else {
+		return new Date(b.snippet.publishedAt).valueOf() - new Date(a.snippet.publishedAt).valueOf();
+		}
+	});
+  } else {
+  this.videosData
+	.sort((a: IVideo, b: IVideo): number => {
+		if (name.includes('Up')) {
+		return parseInt(a.statistics.viewCount, 10) - parseInt(b.statistics.viewCount, 10);
+		} else {
+		return parseInt(b.statistics.viewCount, 10) - parseInt(a.statistics.viewCount, 10);
+		}
+  });
+	}
+   }
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
   const data: [string, SimpleChange][] = Object.entries(changes);
   data.forEach((arr: [string, SimpleChange]): void => {
   const [name, data]: [string, SimpleChange] = arr;
+  if (name === 'sort') {
+  if (this.videosData) {
+  this.sortBy(data.currentValue);
+  }
+  }
   if (name === 'videoName') {
   if (data.currentValue) { this.setVideosData(data.currentValue); }
   }

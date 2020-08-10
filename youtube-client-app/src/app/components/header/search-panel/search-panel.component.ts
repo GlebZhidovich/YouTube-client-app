@@ -14,6 +14,7 @@ export class SearchPanelComponent {
   private input: ElementRef<HTMLInputElement>;
 
   @Output() public getName: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public sb: EventEmitter<string> = new EventEmitter<string>();
 
   public isFilterShow(): void {
   this.isFilter = !this.isFilter;
@@ -24,6 +25,10 @@ export class SearchPanelComponent {
   const value: string = elem.value;
   this.getName.emit(value);
   elem.value = '';
+  }
+
+  public sortBy(type: string): void {
+	this.sb.emit(type);
   }
 
 }

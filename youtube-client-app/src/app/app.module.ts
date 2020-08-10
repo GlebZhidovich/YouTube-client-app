@@ -11,6 +11,7 @@ import { UserLoginComponent } from './components/header/user-login/user-login.co
 import { SearchItemComponent } from './components/search-item/search-item.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { MaterialModule } from './material.module';
+import { SortByNamePipe } from './components/search-results/sort-by-name.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MaterialModule } from './material.module';
 	SearchPanelComponent,
 	SortPanelComponent,
 	UserLoginComponent,
+	SortByNamePipe,
   ],
   imports: [
 	BrowserModule,

@@ -17,7 +17,7 @@
 
   </div>
   <ng-container *ngIf="isFilter">
-    <app-sort-panel></app-sort-panel>
+    <app-sort-panel (sb)="sortBy($event)"></app-sort-panel>
   </ng-container>
 
 </div>
