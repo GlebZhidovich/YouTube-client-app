@@ -15,6 +15,7 @@ export class SearchPanelComponent {
 
   @Output() public getName: EventEmitter<string> = new EventEmitter<string>();
   @Output() public sb: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public sbw: EventEmitter<string> = new EventEmitter<string>();
 
   public isFilterShow(): void {
   this.isFilter = !this.isFilter;
@@ -31,4 +32,7 @@ export class SearchPanelComponent {
 	this.sb.emit(type);
   }
 
+  public sortByWord(name: string): void {
+  this.sbw.emit(name);
+  }
 }

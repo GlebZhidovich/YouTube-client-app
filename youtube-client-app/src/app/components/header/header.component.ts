@@ -10,6 +10,7 @@ export class HeaderComponent {
 
   @Output() public getVideoName: EventEmitter<string> = new EventEmitter<string>();
   @Output() public sb: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public sbw: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private cdr: ChangeDetectorRef) {
 
@@ -23,4 +24,7 @@ export class HeaderComponent {
 	this.sb.emit(type);
   }
 
+  public sortByWord(name: string): void {
+  this.sbw.emit(name);
+  }
 }

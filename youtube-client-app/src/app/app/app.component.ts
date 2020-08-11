@@ -8,10 +8,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 export class AppComponent {
   public videoName: string;
   public sort: string;
-
-  constructor(private cdr: ChangeDetectorRef) {
-
-  }
+  public sortWord: string;
 
   public getName(name: string): void {
   this.videoName = name;
@@ -19,7 +16,9 @@ export class AppComponent {
 
   public sortBy(type: string): void {
   this.sort = type;
-  this.cdr.detectChanges();
-  // console.log(type);
+  }
+
+  public sortByWord(name: string): void {
+  this.sortWord = name;
   }
 }

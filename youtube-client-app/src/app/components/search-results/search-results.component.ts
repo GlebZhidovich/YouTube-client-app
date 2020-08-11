@@ -1,11 +1,10 @@
 import {
   ChangeDetectionStrategy,
-  Component, ElementRef,
+  Component,
   Input,
   OnChanges,
-  OnInit,
   SimpleChange,
-  SimpleChanges, ViewChild,
+  SimpleChanges,
 } from '@angular/core';
 import * as data from '../../../shared/data.json';
 import { IVideo } from '../../models/search-response.model';
@@ -32,6 +31,7 @@ export class SearchResultsComponent implements OnChanges {
 
   @Input() public videoName: string;
   @Input() public sort: string;
+  @Input() public sortWord: string;
 
   public setVideosData(name: string): void {
   this.videosData = (data as unknown as IJson).default.items;
