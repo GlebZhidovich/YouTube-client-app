@@ -1,10 +1,25 @@
+import { animate, group, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Output, ViewChild, } from '@angular/core';
 
 @Component({
   selector: 'app-search-panel',
   templateUrl: './search-panel.component.html',
   styleUrls: ['./search-panel.component.scss'],
-  animations: [],
+  animations: [
+	trigger('open-close', [
+		transition(':enter', [
+	  style({
+		height: 0,
+	}),
+		animate('500ms ease-in'),
+		]),
+		transition(':leave', [
+		animate('500ms ease-out', style({
+		height: 0,
+		})),
+		]),
+	]),
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchPanelComponent {
