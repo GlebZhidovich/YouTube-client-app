@@ -5,22 +5,22 @@ import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Output, V
   selector: 'app-search-panel',
   templateUrl: './search-panel.component.html',
   styleUrls: ['./search-panel.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
 	trigger('open-close', [
 		transition(':enter', [
-	  style({
-		height: 0,
-	}),
+		style({
+			height: 0,
+		}),
 		animate('500ms ease-in'),
 		]),
 		transition(':leave', [
 		animate('500ms ease-out', style({
-		height: 0,
+			height: 0,
 		})),
 		]),
 	]),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchPanelComponent {
   public isFilter: boolean = false;

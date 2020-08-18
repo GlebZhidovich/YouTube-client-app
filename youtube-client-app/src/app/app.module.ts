@@ -4,12 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
+import { AuthModule } from './auth/auth.module';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchPanelComponent } from './components/header/search-panel/search-panel.component';
 import { SortPanelComponent } from './components/header/sort-panel/sort-panel.component';
 import { UserLoginComponent } from './components/header/user-login/user-login.component';
 import { SearchItemComponent } from './components/search-item/search-item.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { CoreModule } from './core/core.module';
 import { MaterialModule } from './material.module';
 import { SortByNamePipe } from './components/search-results/sort-by-name.pipe';
 
@@ -29,6 +31,8 @@ import { SortByNamePipe } from './components/search-results/sort-by-name.pipe';
 	AppRoutingModule,
 	BrowserAnimationsModule,
 	MaterialModule,
+  AuthModule,
+  CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
