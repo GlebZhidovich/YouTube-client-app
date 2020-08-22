@@ -1,8 +1,8 @@
 <div class="container">
   <div class="search-panel">
 
-    <div class="play-btn">
-      <img src="assets/img/logo.svg" alt="play">
+    <div class="play-btn" [routerLink]="['']">
+      <img src="../../../../assets/img/logo.svg" alt="play">
     </div>
 
     <mat-form-field class="search-field">
@@ -12,7 +12,7 @@
     <button class="search-btn" (click)="searchVideo()" mat-raised-button>Search</button>
 
     <div class="setting-btn" (click)="isFilterShow()">
-      <img src="assets/img/search_settings.svg" alt="settings">
+      <img src="../../../../assets/img/search_settings.svg" alt="settings">
     </div>
 
   </div>

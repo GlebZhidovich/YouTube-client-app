@@ -2,10 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnChanges,
+  OnChanges, OnInit,
   SimpleChange,
   SimpleChanges,
 } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import * as data from '../../../shared/data.json';
 import { IVideo } from '../../models/search-response.model';
 import { SortService } from './sort.service';
@@ -23,10 +24,11 @@ interface IJson {
   providers: [SortService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchResultsComponent implements OnChanges {
+export class SearchResultsComponent implements  OnInit, OnChanges {
   public videosData: IVideo[];
 
-  constructor(private ss: SortService) {
+  constructor(private ss: SortService,
+  private router: ActivatedRoute) {
   }
 
   @Input() public videoName: string;
@@ -41,6 +43,12 @@ export class SearchResultsComponent implements OnChanges {
   if (name) {
   this.videosData = this.ss.sort(name, this.videosData);
   }
+  }
+
+  public ngOnInit(): void {
+  this.router.queryParams.subscribe((params: Params): void => {
+  console.log(params);
+  });
   }
 
   public ngOnChanges(changes: SimpleChanges): void {

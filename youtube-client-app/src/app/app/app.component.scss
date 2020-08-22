@@ -1,9 +1,5 @@
-.app-root {
-  height: 100%;
+:host {
   display: flex;
   flex-direction: column;
-}
-
-app-search-results {
-  display: block;
+  height: 100%;
 }

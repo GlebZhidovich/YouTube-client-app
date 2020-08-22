@@ -1,5 +1,6 @@
 import { animate, group, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Output, ViewChild, } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-panel',
@@ -25,10 +26,12 @@ import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Output, V
 export class SearchPanelComponent {
   public isFilter: boolean = false;
 
+  constructor(private router: Router) {
+  }
+
   @ViewChild('search', { static: true })
   private input: ElementRef<HTMLInputElement>;
 
-  @Output() public getName: EventEmitter<string> = new EventEmitter<string>();
   @Output() public sb: EventEmitter<string> = new EventEmitter<string>();
   @Output() public sbw: EventEmitter<string> = new EventEmitter<string>();
 
@@ -38,8 +41,11 @@ export class SearchPanelComponent {
 
   public searchVideo(): void {
   const elem: HTMLInputElement = this.input.nativeElement;
-  const value: string = elem.value;
-  this.getName.emit(value);
+  this.router.navigate(['', {
+  queryParams: {
+  name: elem.value,
+  },
+  }]);
   elem.value = '';
   }
 
