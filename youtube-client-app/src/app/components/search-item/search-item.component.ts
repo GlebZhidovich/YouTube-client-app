@@ -40,6 +40,5 @@ export class SearchItemComponent implements OnInit {
 	this.statistics = this.videoData.statistics;
 	this.snippet = this.videoData.snippet;
   this.day = new Date(this.snippet.publishedAt).valueOf();
-  console.log(this.day);
   }
 }

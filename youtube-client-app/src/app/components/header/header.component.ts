@@ -27,4 +27,5 @@ export class HeaderComponent {
   public sortByWord(name: string): void {
   this.sbw.emit(name);
   }
+
 }
