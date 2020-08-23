@@ -54,8 +54,7 @@
     "import-spacing": true,
     "indent": [
       true,
-      "tabs",
-      4
+      "spaces"
     ],
     "interface-name": [
       true,

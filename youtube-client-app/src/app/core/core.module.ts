@@ -10,23 +10,23 @@ import { ErrorComponent } from './pages/error/error.component';
 
 @NgModule({
   declarations: [
-	ErrorComponent,
-	HeaderComponent,
-	SearchPanelComponent,
-	SortPanelComponent,
-	UserLoginComponent,
+    ErrorComponent,
+    HeaderComponent,
+    SearchPanelComponent,
+    SortPanelComponent,
+    UserLoginComponent,
   ],
   imports: [
-  CommonModule,
-  MaterialModule,
-  RouterModule,
+    CommonModule,
+    MaterialModule,
+    RouterModule,
   ],
   exports: [
-	ErrorComponent,
-	HeaderComponent,
-	SearchPanelComponent,
-	SortPanelComponent,
-	UserLoginComponent,
+    ErrorComponent,
+    HeaderComponent,
+    SearchPanelComponent,
+    SortPanelComponent,
+    UserLoginComponent,
   ],
 })
 export class CoreModule { }

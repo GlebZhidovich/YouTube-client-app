@@ -1,5 +1,5 @@
-import { animate, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sort-panel',
@@ -8,21 +8,44 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SortPanelComponent {
-  private date: string = 'Up';
-  private view: string = 'Up';
+  private date: string = 'up';
+  private view: string = 'up';
+  public isDate: boolean = false;
+  public isView: boolean = false;
+  public isWord: boolean = false;
 
-  @Output() public sb: EventEmitter<string> = new EventEmitter<string>();
-  @Output() public sbw: EventEmitter<string> = new EventEmitter<string>();
+  constructor(private router: Router) {
+  }
 
   public sortBy(type: string): void {
-  this[type] = this[type] === 'Up' ? 'Down' : 'Up';
-  this.sb.emit(type + this[type]);
+    if (!this[`is${capitalize(type)}`]) {
+      this[`is${capitalize(type)}`] = !this[`is${capitalize(type)}`];
+    }
+    this[type] = this[type] === 'up' ? 'down' : 'up';
+    this.router.navigate([''], {
+      queryParams: {
+        [type]: this[type],
+      },
+    });
   }
 
-  public sortByWord(name: HTMLInputElement): void {
-  if (name.value !== '') {
-  this.sbw.emit(name.value);
-  name.value = '';
+  public sortByWord(event: MouseEvent | KeyboardEvent, name: HTMLInputElement): void {
+    if (
+      (event instanceof MouseEvent || event.key === 'Enter')
+    ) {
+      console.log(event);
+      this.router.navigate([''], {
+        queryParams: {
+          word: name.value,
+        },
+      });
+    }
   }
-  }
+}
+
+function capitalize(s: string) {
+  if (typeof s !== 'string') {
+    return '';
+  };
+  return s[0].toUpperCase() + s.substring(1);
 }

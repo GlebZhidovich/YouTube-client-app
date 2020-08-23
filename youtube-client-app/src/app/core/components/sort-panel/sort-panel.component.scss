@@ -1,5 +1,9 @@
 @import "../../../../styles/vars";
 
+:host {
+  overflow: hidden;
+}
+
 .sort-panel {
   display: flex;
   align-items: center;

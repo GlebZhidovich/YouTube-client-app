@@ -6,10 +6,10 @@
     </div>
 
     <mat-form-field class="search-field">
-      <input #search matInput placeholder="Name">
+      <input (keypress)="searchVideo($event, search)" #search matInput placeholder="Name">
     </mat-form-field>
 
-    <button class="search-btn" (click)="searchVideo()" mat-raised-button>Search</button>
+    <button class="search-btn" (click)="searchVideo($event, search)" mat-raised-button>Search</button>
 
     <div class="setting-btn" (click)="isFilterShow()">
       <img src="../../../../assets/img/search_settings.svg" alt="settings">
@@ -17,6 +17,6 @@
 
   </div>
 
-  <app-sort-panel [@open-close] *ngIf="isFilter"> (sb)="sortBy($event)" (sbw)="sortByWord($event)"></app-sort-panel>
+  <app-sort-panel [@open-close] *ngIf="isFilter">></app-sort-panel>
 
 </div>

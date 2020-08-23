@@ -1,9 +1,11 @@
-.error-page {
+:host {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   height: 100%;
+}
+
+.error-page {
 
   &__wrap {
     text-align: center;
