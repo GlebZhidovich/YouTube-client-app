@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
-import { LoginComponent } from './auth/pages/login/login.component';
 import { ErrorComponent } from './core/pages/error/error.component';
-import { SearchResultsComponent } from './youtube/components/search-results/search-results.component';
 
 const routes: Routes = [
-    {path: '', component: SearchResultsComponent, pathMatch: 'full', canActivate: [AuthGuard]},
-    {path: 'auth', component: LoginComponent},
+    {
+      path: '',
+      pathMatch: 'full',
+      canActivate: [AuthGuard],
+      canLoad: [AuthGuard],
+      loadChildren: './youtube/youtube.module#YoutubeModule',
+    },
+    {
+      path: 'auth',
+      loadChildren: './auth/auth.module#AuthModule',
+    },
     {path: 'error', component: ErrorComponent},
     {path: '**', redirectTo: '/error'},
   ];
