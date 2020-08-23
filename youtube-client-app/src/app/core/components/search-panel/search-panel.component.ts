@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component} from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-search-panel',
@@ -26,15 +27,19 @@ import { Router } from '@angular/router';
 export class SearchPanelComponent {
   public isFilter: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private authService: AuthService) {}
 
   public isFilterShow(): void {
-    this.isFilter = !this.isFilter;
+    if (this.authService.getIsAuth()) {
+      this.isFilter = !this.isFilter;
+    }
   }
 
   public searchVideo(event: MouseEvent | KeyboardEvent, elem: HTMLInputElement): void {
     if (elem.value !== '' &&
-      (event instanceof MouseEvent || event.key === 'Enter')
+      (event instanceof MouseEvent || event.key === 'Enter') &&
+      this.authService.getIsAuth()
     ) {
       this.router.navigate([''], {
         queryParams: {

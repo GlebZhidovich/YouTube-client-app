@@ -1,5 +1,9 @@
 @import "../../../../styles/vars";
 
+:host {
+  cursor: pointer;
+}
+
 .search-item {
   padding: 14px;
   box-sizing: border-box;
