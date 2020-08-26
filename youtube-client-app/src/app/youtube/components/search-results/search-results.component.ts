@@ -1,13 +1,13 @@
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  Input,
-  OnChanges, OnInit,
-  SimpleChange,
-  SimpleChanges,
+  OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import * as data from '../../../../shared/data.json';
+import { DataService } from '../../../core/services/data.service';
 import { IVideo } from '../../../models/search-response.model';
 import { SortService } from './sort.service';
 
@@ -34,12 +34,17 @@ export class SearchResultsComponent implements  OnInit {
     private sortService: SortService,
     private router: ActivatedRoute,
     private cdr: ChangeDetectorRef,
+    private dataService: DataService,
   ) {
   }
 
   public setVideosData(name: string): void {
-    this.videosData = (data as unknown as IJson).default.items;
-    this.cdr.detectChanges();
+    const source: Subscription =  this.dataService.loadVideoData()
+      .subscribe((data: IVideo[]): void => {
+      this.videosData = data;
+      this.cdr.detectChanges();
+      source.unsubscribe();
+    });
   }
 
   public sortBy(arr: [string, string]): void {

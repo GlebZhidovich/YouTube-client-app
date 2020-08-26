@@ -32,7 +32,9 @@ export class SearchItemComponent implements OnInit {
       'old-date': this.day > 180,
     };
     for (const className in border) {
-      if (border[className]) { return className; }
+      if (border[className]) {
+        return className;
+      }
     }
   }
 

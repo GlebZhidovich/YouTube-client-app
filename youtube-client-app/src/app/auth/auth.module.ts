@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from '../material.module';
 import { AuthComponent } from './auth.component';
-import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
@@ -19,9 +19,6 @@ const routes: Routes = [
     CommonModule,
     MaterialModule,
     RouterModule.forChild(routes),
-  ],
-  providers: [
-    AuthService,
   ],
 })
 export class AuthModule { }
