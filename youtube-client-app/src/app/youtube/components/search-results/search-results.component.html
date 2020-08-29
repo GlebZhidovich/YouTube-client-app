@@ -1,3 +1,6 @@
 <div class="search-result">
-  <app-search-item *ngFor="let videoData of videosData | sortByName : sortWord" [videoData]="videoData"></app-search-item>
+  <app-search-item
+    *ngFor="let videoData of videosData | sortByName : sortWord | sortByDate : sortDate | sortByView : sortView"
+    [videoData]="videoData"
+  ></app-search-item>
 </div>

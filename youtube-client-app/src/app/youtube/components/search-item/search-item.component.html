@@ -1,5 +1,5 @@
 <div class="search-item">
-  <mat-card class="card {{borderClass}}">
+  <mat-card class="card" [ngStyle]="{'border-color': snippet.publishedAt | videoDate}">
 
     <div class="card__figure">
       <img class="card__img" mat-card-image [src]="snippet.thumbnails.medium.url" alt="Picture">

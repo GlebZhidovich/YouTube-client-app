@@ -33,7 +33,6 @@ export class SortPanelComponent {
     if (
       (event instanceof MouseEvent || event.key === 'Enter')
     ) {
-      console.log(event);
       this.router.navigate([''], {
         queryParams: {
           word: name.value,
@@ -43,9 +42,9 @@ export class SortPanelComponent {
   }
 }
 
-function capitalize(s: string) {
+function capitalize(s: string): string {
   if (typeof s !== 'string') {
     return '';
-  };
+  }
   return s[0].toUpperCase() + s.substring(1);
 }

@@ -9,24 +9,6 @@
   box-sizing: border-box;
 }
 
-.new-date,
-.medium-date,
-.old-date {
-  border-bottom: 5px solid;
-}
-
-.new-date{
-  border-color: #005eff;
-}
-
-.medium-date{
-  border-color: #2d8000;
-}
-
-.old-date {
-  border-color: #ff0000;
-}
-
 .card {
   display: flex;
   flex-direction: column;
@@ -34,6 +16,7 @@
   width: 263px;
   height: 365px;
   box-sizing: border-box;
+  border-bottom: 5px solid;
 
   &__figure {
     & img {

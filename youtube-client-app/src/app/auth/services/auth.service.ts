@@ -3,22 +3,31 @@ import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private isAuth: boolean = false;
 
   constructor(private router: Router) {
   }
 
   public login(): void {
-    this.isAuth = true;
+    localStorage.setItem('auth', 'true');
     this.router.navigate(['']);
   }
 
-  public getIsAuth(): boolean { return this.isAuth; }
+  public logout(): void {
+    localStorage.removeItem('auth');
+    this.router.navigate(['auth']);
+  }
+
+  public getIsAuth(): boolean {
+    return !!localStorage.getItem('auth');
+  }
 
   public isAuthenticated(): Promise<boolean> {
     return new Promise<boolean>((resolve: (value?: boolean | PromiseLike<boolean>) => void): void => {
       setTimeout((): void => {
-        resolve(this.isAuth);
+        if (localStorage.getItem('auth')) {
+          resolve(true);
+        }
+        resolve(false);
       }, 1000);
     });
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../../core/services/data.service';
+import { IVideo } from '../../../shared/models/search-response.model';
 
 @Component({
   selector: 'app-detailed-information',
@@ -8,6 +9,8 @@ import { DataService } from '../../../core/services/data.service';
   styleUrls: ['./detailed-information.component.scss'],
 })
 export class DetailedInformationComponent implements OnInit {
+
+  public videoData: IVideo;
 
   constructor(
     private route: ActivatedRoute,
@@ -17,7 +20,8 @@ export class DetailedInformationComponent implements OnInit {
   public ngOnInit(): void {
     this.route.params.subscribe((params: {id: string}): void => {
       const { id }: { id: string } = params;
-      console.log(this.dataService.getById(id));
+      this.videoData = this.dataService.getById(id);
+      console.log(this.videoData);
     });
   }
 

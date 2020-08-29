@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component} from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../auth/auth.service';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-search-panel',
@@ -38,8 +38,8 @@ export class SearchPanelComponent {
 
   public searchVideo(event: MouseEvent | KeyboardEvent, elem: HTMLInputElement): void {
     if (elem.value !== '' &&
-      (event instanceof MouseEvent || event.key === 'Enter') &&
-      this.authService.getIsAuth()
+      (event instanceof MouseEvent || event.key === 'Enter')
+      && this.authService.getIsAuth()
     ) {
       this.router.navigate([''], {
         queryParams: {

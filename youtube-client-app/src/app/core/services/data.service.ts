@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as data from '../../../shared/data.json';
-import { IVideo } from '../../models/search-response.model';
+import { IVideo } from '../../shared/models/search-response.model';
 
 interface IJson {
   default: {

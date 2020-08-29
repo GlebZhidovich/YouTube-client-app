@@ -7,7 +7,11 @@ export interface IStatistics {
 }
 
 export interface ISnippet {
-  thumbnails: { medium: { url: string } };
+  thumbnails: {
+    standard: { url: string };
+    medium: { url: string },
+  };
   title: string;
+  description: string;
   publishedAt: string;
 }
