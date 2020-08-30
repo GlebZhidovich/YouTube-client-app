@@ -20,10 +20,12 @@
     </mat-card-content>
     <mat-card-actions>
       <button
+        *ngIf="!(isAuth | async)"
         (click)="auth.login()"
         mat-raised-button
         color="primary">Login</button>
       <button
+        *ngIf="isAuth | async"
         (click)="auth.logout()"
         mat-raised-button
         color="primary">Logout</button>
