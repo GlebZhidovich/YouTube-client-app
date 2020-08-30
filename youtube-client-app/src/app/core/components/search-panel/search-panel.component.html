@@ -1,22 +1,32 @@
 <div class="container">
   <div class="search-panel">
 
-    <div class="play-btn" [routerLink]="['']">
+    <div
+      class="play-btn"
+      [routerLink]="['']">
       <img src="../../../../assets/img/logo.svg" alt="play">
     </div>
 
     <mat-form-field class="search-field">
-      <input (keypress)="searchVideo($event, search)" #search matInput placeholder="Name">
+      <input
+        #search
+        matInput
+        placeholder="Name">
     </mat-form-field>
 
-    <button class="search-btn" (click)="searchVideo($event, search)" mat-raised-button>Search</button>
+<!--    <button class="search-btn" (click)="searchVideo($event, search)" mat-raised-button>Search</button>-->
 
-    <div class="setting-btn" (click)="isFilterShow()">
+    <div
+      class="setting-btn"
+      (click)="isFilterShow()">
       <img src="../../../../assets/img/search_settings.svg" alt="settings">
     </div>
 
   </div>
 
-  <app-sort-panel [@open-close] *ngIf="isFilter">></app-sort-panel>
+  <app-sort-panel
+    [@open-close]
+    *ngIf="isFilter">
+  </app-sort-panel>
 
 </div>
