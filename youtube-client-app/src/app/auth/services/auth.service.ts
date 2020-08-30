@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, TeardownLogic } from 'rxjs';
+import { Subscriber } from 'rxjs/src/internal/Subscriber';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -28,6 +30,19 @@ export class AuthService {
           resolve(true);
         }
         resolve(false);
+      }, 1000);
+    });
+  }
+
+  public isAuthenticated2(): Observable<boolean> {
+    return Observable.create((subscriber: Subscriber<boolean>): TeardownLogic => {
+      setTimeout((): void => {
+        if (localStorage.getItem('auth')) {
+          subscriber.next(true);
+        } else {
+          subscriber.next(false);
+        }
+        subscriber.complete();
       }, 1000);
     });
   }

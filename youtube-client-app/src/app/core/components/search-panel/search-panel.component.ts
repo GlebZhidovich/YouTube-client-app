@@ -63,9 +63,9 @@ export class SearchPanelComponent implements OnInit {
         filter((str: string): boolean => str.length > 2),
       )
       .subscribe({
-        next: console.log,
-        error: console.log,
-        complete: (): void => console.log('complete'),
+        next(x: string): void { console.log(`got value ${x}`); },
+        error(err: string): void { console.error(`something wrong occurred: ${err}`); },
+        complete(): void { console.log('done'); },
       });
   }
 
