@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -17,6 +18,7 @@ import { MaterialModule } from './material.module';
     BrowserAnimationsModule,
     MaterialModule,
     CoreModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

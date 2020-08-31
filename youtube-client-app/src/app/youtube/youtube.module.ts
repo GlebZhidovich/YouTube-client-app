@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../auth/auth.guard';
 import { MaterialModule } from '../material.module';
+import { AuthGuard } from '../shared/guards/auth.guard';
 import { SharedModule } from '../shared/shared.module';
 import { SearchItemComponent } from './components/search-item/search-item.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
@@ -16,6 +16,11 @@ const routes: Routes = [
   {
     path: '',
     component: SearchResultsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: ':id',
+    component: DetailedInformationComponent,
     canActivate: [AuthGuard],
   },
 ];

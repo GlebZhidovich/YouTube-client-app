@@ -2,8 +2,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { fromEvent } from 'rxjs';
-import { debounceTime, filter, map } from 'rxjs/operators';
-import { AuthService } from '../../../auth/services/auth.service';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-search-panel',
@@ -41,17 +41,13 @@ export class SearchPanelComponent implements OnInit {
     }
   }
 
-  public searchVideo(event: MouseEvent | KeyboardEvent, elem: HTMLInputElement): void {
-    if (elem.value !== '' &&
-      (event instanceof MouseEvent || event.key === 'Enter')
-      && this.authService.getIsAuth()
-    ) {
-      this.router.navigate([''], {
+  private searchVideo(value: string): void {
+    if (this.authService.getIsAuth()) {
+      this.router.navigate(['youtube'], {
         queryParams: {
-          videoName: elem.value,
+          videoName: value,
         },
       });
-      elem.value = '';
     }
   }
 
@@ -61,9 +57,10 @@ export class SearchPanelComponent implements OnInit {
         debounceTime(700),
         map((event: KeyboardEvent): string  => (event.target as HTMLInputElement).value),
         filter((str: string): boolean => str.length > 2),
+        distinctUntilChanged(),
       )
       .subscribe({
-        next(x: string): void { console.log(`got value ${x}`); },
+        next: (x: string): void => { this.searchVideo(x); },
         error(err: string): void { console.error(`something wrong occurred: ${err}`); },
         complete(): void { console.log('done'); },
       });

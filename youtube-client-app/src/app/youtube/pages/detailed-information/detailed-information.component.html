@@ -1,4 +1,4 @@
-<div class="card__wrap">
+<div *ngIf="videoData" class="card__wrap">
   <mat-card
     class="card"
     style="filter: drop-shadow(5px 10px 10px {{videoData.snippet.publishedAt | videoDate}})"
@@ -61,7 +61,7 @@
 
   </mat-card>
   <div
-    [routerLink]="['']"
+    [routerLink]="['/youtube']"
     class="card__btn"
     [ngStyle]="{'background-color': videoData.snippet.publishedAt | videoDate}"
   ></div>

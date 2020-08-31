@@ -5,7 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { from, Observable, Subscription } from 'rxjs';
+import { catchError, map, reduce, switchMap } from 'rxjs/operators';
 import { DataService } from '../../../core/services/data.service';
 import { IVideo } from '../../../shared/models/search-response.model';
 
@@ -37,12 +38,24 @@ export class SearchResultsComponent implements  OnInit {
   }
 
   public setVideosData(name: string): void {
-    const source: Subscription =  this.dataService.loadVideoData()
-      .subscribe((data: IVideo[]): void => {
-      this.videosData = data;
-      this.cdr.detectChanges();
-      source.unsubscribe();
-    });
+    const source: Subscription =  this.dataService.loadVideo(name)
+      .pipe(
+        switchMap((data: {items: IVideo[]}): Observable<object> => from(data.items)),
+        map((obj: {id: {videoId: string}}): string => obj.id.videoId),
+        reduce((a: string, b: string): string => `${a},${b}`),
+        switchMap((group: string): Observable<Object> => this.dataService.loadVideoData(group)),
+        map((data: {items: IVideo[]}): IVideo[] => data.items),
+      )
+      .subscribe(
+        (data: IVideo[]): void => {
+        console.log(data);
+        this.dataService.setVideoData(data);
+        this.videosData = data;
+        this.cdr.detectChanges();
+        source.unsubscribe();
+    },
+        (err: string): void => console.log(err),
+    );
   }
 
   public sortBy(arr: [string, string]): void {
@@ -63,6 +76,9 @@ export class SearchResultsComponent implements  OnInit {
   }
 
   public ngOnInit(): void {
+    if (this.dataService.getVideoData()) {
+      this.videosData = this.dataService.getVideoData();
+    }
     this.router.queryParams.subscribe((params: Params): void => {
       Object.entries(params).forEach(([name, value]: [string, string]): void => {
         if (name === 'videoName') {
