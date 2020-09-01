@@ -20,6 +20,10 @@
   .setting-btn {
     cursor: pointer;
     outline: none;
+
+    @media screen and (max-width: 350px) {
+      display: none;
+    }
   }
 
   .play-btn,

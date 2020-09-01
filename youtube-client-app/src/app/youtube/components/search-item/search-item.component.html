@@ -5,7 +5,7 @@
       <img class="card__img" mat-card-image [src]="snippet.thumbnails.medium.url" alt="Picture">
     </div>
 
-    <mat-card-content>
+    <mat-card-content class="card__content">
 
       <ul class="card__info-list">
 
@@ -34,7 +34,7 @@
 
     <mat-card-actions class="card__footer">
 
-      <button [routerLink]="[videoData.id]" mat-button>more...</button>
+      <button [routerLink]="['/youtube', videoData.id]" mat-button>more...</button>
 
     </mat-card-actions>
 

@@ -4,8 +4,8 @@ $black-color: #000000;
 :host {
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 100%;
+  padding-top: 50px;
 }
 
 .card {
@@ -38,6 +38,7 @@ $black-color: #000000;
     };
     border-radius: 5px 0 0 5px;
     cursor: pointer;
+    outline: none;
   }
 
   &__content {
@@ -84,8 +85,10 @@ $black-color: #000000;
   }
 
   &__description {
+    max-height: 180px;
     font-size: 12px;
     color: $gray-color;
+    overflow: auto;
   }
 
   &__footer {

@@ -10,12 +10,12 @@ export class AuthService {
 
   public login(): void {
     localStorage.setItem('auth', 'true');
-    this.router.navigate(['']);
+    this.router.navigate(['/youtube']);
   }
 
   public logout(): void {
     localStorage.removeItem('auth');
-    this.router.navigate(['auth']);
+    this.router.navigate(['/auth']);
   }
 
   public getIsAuth(): boolean {

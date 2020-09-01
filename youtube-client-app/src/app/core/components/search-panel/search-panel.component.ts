@@ -43,7 +43,7 @@ export class SearchPanelComponent implements OnInit {
 
   private searchVideo(value: string): void {
     if (this.authService.getIsAuth()) {
-      this.router.navigate(['youtube'], {
+      this.router.navigate(['/youtube'], {
         queryParams: {
           videoName: value,
         },

@@ -15,7 +15,7 @@ export class DataService {
   ) { }
 
   public loadVideo(name: string): Observable<Object> {
-    return this.http.get(`https://www.googleapis.com/youtube/v3/search?key=AIzaSyBhdQAgLeAYO2Tey3oeoWZ2KAUu4asq_Fk&type=video&maxResults=15&q=${'js'}`);
+    return this.http.get(`https://www.googleapis.com/youtube/v3/search?key=AIzaSyBhdQAgLeAYO2Tey3oeoWZ2KAUu4asq_Fk&type=video&maxResults=15&q=${name}`);
   }
 
   public loadVideoData(group: string): Observable<Object> {

@@ -22,7 +22,7 @@ export class SortPanelComponent {
       this[`is${capitalize(type)}`] = !this[`is${capitalize(type)}`];
     }
     this[type] = this[type] === 'up' ? 'down' : 'up';
-    this.router.navigate([''], {
+    this.router.navigate(['/youtube'], {
       queryParams: {
         [type]: this[type],
       },
@@ -33,7 +33,7 @@ export class SortPanelComponent {
     if (
       (event instanceof MouseEvent || event.key === 'Enter')
     ) {
-      this.router.navigate([''], {
+      this.router.navigate(['/youtube'], {
         queryParams: {
           word: name.value,
         },

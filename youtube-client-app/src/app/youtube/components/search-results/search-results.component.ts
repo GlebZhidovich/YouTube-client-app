@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { from, Observable, Subscription } from 'rxjs';
+import { from, Observable, Subscription, throwError } from 'rxjs';
 import { catchError, map, reduce, switchMap } from 'rxjs/operators';
 import { DataService } from '../../../core/services/data.service';
 import { IVideo } from '../../../shared/models/search-response.model';
@@ -45,10 +45,10 @@ export class SearchResultsComponent implements  OnInit {
         reduce((a: string, b: string): string => `${a},${b}`),
         switchMap((group: string): Observable<Object> => this.dataService.loadVideoData(group)),
         map((data: {items: IVideo[]}): IVideo[] => data.items),
+        catchError((err: string): [] => []),
       )
       .subscribe(
         (data: IVideo[]): void => {
-        console.log(data);
         this.dataService.setVideoData(data);
         this.videosData = data;
         this.cdr.detectChanges();
