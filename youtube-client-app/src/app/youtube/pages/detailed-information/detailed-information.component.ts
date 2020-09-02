@@ -22,7 +22,6 @@ export class DetailedInformationComponent implements OnInit {
     this.route.params.subscribe((params: {id: string}): void => {
       const { id }: { id: string } = params;
       this.videoData = this.dataService.getById(id);
-      console.log(this.videoData);
       if (!this.videoData) {
         this.router.navigate(['error']);
       }

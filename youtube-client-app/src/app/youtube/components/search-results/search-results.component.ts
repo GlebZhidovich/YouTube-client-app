@@ -5,10 +5,10 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { from, Observable, Subscription, throwError } from 'rxjs';
-import { catchError, map, reduce, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { DataService } from '../../../core/services/data.service';
 import { IVideo } from '../../../shared/models/search-response.model';
+import { capitalize } from '../../../shared/shared';
 
 interface ITypes {
   date(type: string, name: string): string;
@@ -23,7 +23,7 @@ interface ITypes {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchResultsComponent implements  OnInit {
-  public videosData: IVideo[];
+  public videosData: Observable<IVideo[] | []>;
   public videoName: string;
   public sort: string;
   public sortWord: string;
@@ -38,24 +38,8 @@ export class SearchResultsComponent implements  OnInit {
   }
 
   public setVideosData(name: string): void {
-    const source: Subscription =  this.dataService.loadVideo(name)
-      .pipe(
-        switchMap((data: {items: IVideo[]}): Observable<object> => from(data.items)),
-        map((obj: {id: {videoId: string}}): string => obj.id.videoId),
-        reduce((a: string, b: string): string => `${a},${b}`),
-        switchMap((group: string): Observable<Object> => this.dataService.loadVideoData(group)),
-        map((data: {items: IVideo[]}): IVideo[] => data.items),
-        catchError((err: string): [] => []),
-      )
-      .subscribe(
-        (data: IVideo[]): void => {
-        this.dataService.setVideoData(data);
-        this.videosData = data;
-        this.cdr.detectChanges();
-        source.unsubscribe();
-    },
-        (err: string): void => console.log(err),
-    );
+    this.videosData = this.dataService.loadVideo(name);
+    this.cdr.detectChanges();
   }
 
   public sortBy(arr: [string, string]): void {
@@ -93,11 +77,4 @@ export class SearchResultsComponent implements  OnInit {
       });
     });
   }
-}
-
-function capitalize(s: string): string {
-  if (typeof s !== 'string') {
-    return '';
-  }
-  return s[0].toUpperCase() + s.substring(1);
 }

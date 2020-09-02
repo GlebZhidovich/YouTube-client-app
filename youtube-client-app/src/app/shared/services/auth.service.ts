@@ -22,18 +22,7 @@ export class AuthService {
     return !!localStorage.getItem('auth');
   }
 
-  public isAuthenticated(): Promise<boolean> {
-    return new Promise<boolean>((resolve: (value?: boolean | PromiseLike<boolean>) => void): void => {
-      setTimeout((): void => {
-        if (localStorage.getItem('auth')) {
-          resolve(true);
-        }
-        resolve(false);
-      }, 1000);
-    });
-  }
-
-  public isAuthenticated2(): Observable<boolean> {
+  public isAuthenticated(): Observable<boolean> {
     return new Observable((subscriber: Subscriber<boolean>): TeardownLogic => {
       setTimeout((): void => {
         if (localStorage.getItem('auth')) {

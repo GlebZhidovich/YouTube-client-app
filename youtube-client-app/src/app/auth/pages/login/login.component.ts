@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../../shared/services/auth.service';
 
@@ -7,15 +7,12 @@ import { AuthService } from '../../../shared/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   public isAuth: Observable<boolean>;
 
-  constructor(public auth: AuthService) {
-    this.isAuth = auth.isAuthenticated2();
-  }
-
-  public ngOnInit(): void {
+  constructor(private auth: AuthService) {
+    this.isAuth = auth.isAuthenticated();
   }
 
 }

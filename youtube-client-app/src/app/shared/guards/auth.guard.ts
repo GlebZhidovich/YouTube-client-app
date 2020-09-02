@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
   }
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.authService.isAuthenticated2().pipe(map((isAuth: boolean): boolean => {
+    return this.authService.isAuthenticated().pipe(map((isAuth: boolean): boolean => {
       if (isAuth) {
         return true;
       }

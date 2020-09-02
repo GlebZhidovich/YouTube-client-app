@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { fromEvent } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { AuthService } from '../../../shared/services/auth.service';
 
@@ -26,8 +26,9 @@ import { AuthService } from '../../../shared/services/auth.service';
     ]),
   ],
 })
-export class SearchPanelComponent implements OnInit {
+export class SearchPanelComponent implements OnInit, OnDestroy {
   public isFilter: boolean = false;
+  private search$: Subscription;
 
   @ViewChild('search', {static: true})
   private searchElem: ElementRef<HTMLInputElement>;
@@ -52,7 +53,7 @@ export class SearchPanelComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    fromEvent(this.searchElem.nativeElement, 'keyup')
+    this.search$ = fromEvent(this.searchElem.nativeElement, 'keyup')
       .pipe(
         debounceTime(700),
         map((event: KeyboardEvent): string  => (event.target as HTMLInputElement).value),
@@ -60,10 +61,13 @@ export class SearchPanelComponent implements OnInit {
         distinctUntilChanged(),
       )
       .subscribe({
-        next: (x: string): void => { this.searchVideo(x); },
-        error(err: string): void { console.error(`something wrong occurred: ${err}`); },
-        complete(): void { console.log('done'); },
+        next: (name: string): void => {
+            this.searchVideo(name);
+          },
       });
   }
 
+  public ngOnDestroy(): void {
+    this.search$.unsubscribe();
+  }
 }

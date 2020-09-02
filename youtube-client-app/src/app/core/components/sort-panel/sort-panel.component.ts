@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { capitalize } from '../../../shared/shared';
+
+enum sorting {
+  up = 'up',
+  down = 'down',
+}
 
 @Component({
   selector: 'app-sort-panel',
@@ -8,8 +14,8 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SortPanelComponent {
-  private date: string = 'up';
-  private view: string = 'up';
+  private date: string = sorting.up;
+  private view: string = sorting.up;
   public isDate: boolean = false;
   public isView: boolean = false;
   public isWord: boolean = false;
@@ -21,7 +27,7 @@ export class SortPanelComponent {
     if (!this[`is${capitalize(type)}`]) {
       this[`is${capitalize(type)}`] = !this[`is${capitalize(type)}`];
     }
-    this[type] = this[type] === 'up' ? 'down' : 'up';
+    this[type] = this[type] === sorting.up ? sorting.down : sorting.up;
     this.router.navigate(['/youtube'], {
       queryParams: {
         [type]: this[type],
@@ -40,11 +46,4 @@ export class SortPanelComponent {
       });
     }
   }
-}
-
-function capitalize(s: string): string {
-  if (typeof s !== 'string') {
-    return '';
-  }
-  return s[0].toUpperCase() + s.substring(1);
 }
