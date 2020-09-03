@@ -1,0 +1,52 @@
+@import "../../vars";
+
+.search-item {
+  padding: 14px;
+  box-sizing: border-box;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 263px;
+  height: 365px;
+  box-sizing: border-box;
+
+  &__figure {
+    & img {
+      vertical-align: top;
+    }
+  }
+
+  &__info {
+
+    &-list {
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+      margin: 0 0 10px;
+      list-style-type: none;
+    }
+
+    &-item {
+      & svg{
+        margin-right: 5px;
+        vertical-align: -1px;
+      }
+    }
+  }
+
+  &__title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: right;
+    color: $card-title-color;
+  }
+
+  &__footer {
+    text-align: center;
+  }
+}
