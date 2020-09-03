@@ -4,17 +4,18 @@
     <p class="sort-panel__title">Sorting by:</p>
 
     <ul class="sort-panel__list">
-      <li class="sort-panel__item selected">
+      <li (click)="sortBy('date')" class="sort-panel__item selected">
         date
       </li>
-      <li class="sort-panel__item selected">
+      <li (click)="sortBy('view')" class="sort-panel__item selected">
         count of view
       </li>
-      <li class="sort-panel__item">
+      <li (click)="sortByWord(input)" class="sort-panel__item">
         by word or sentence
-
+      </li>
+      <li class="sort-panel__item">
         <mat-form-field class="sort-panel__input">
-          <input matInput placeholder="Word or sentence">
+          <input #input matInput placeholder="Word or sentence">
         </mat-form-field>
       </li>
     </ul>

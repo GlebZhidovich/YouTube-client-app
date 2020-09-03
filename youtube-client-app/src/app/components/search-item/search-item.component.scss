@@ -1,8 +1,26 @@
-@import "../../vars";
+@import "../../../styles/vars";
 
 .search-item {
   padding: 14px;
   box-sizing: border-box;
+}
+
+.new-date,
+.medium-date,
+.old-date {
+  border-bottom: 5px solid;
+}
+
+.new-date{
+  border-color: #005eff;
+}
+
+.medium-date{
+  border-color: #2d8000;
+}
+
+.old-date {
+  border-color: #ff0000;
 }
 
 .card {
@@ -30,7 +48,7 @@
     }
 
     &-item {
-      & svg{
+      & img{
         margin-right: 5px;
         vertical-align: -1px;
       }

@@ -1,4 +1,4 @@
-export interface Statistics {
+export interface IStatistics {
   commentCount: string;
   dislikeCount: string;
   favoriteCount: string;
@@ -6,7 +6,8 @@ export interface Statistics {
   viewCount: string;
 }
 
-export interface Snippet {
+export interface ISnippet {
   thumbnails: { medium: { url: string } };
   title: string;
+  publishedAt: string;
 }

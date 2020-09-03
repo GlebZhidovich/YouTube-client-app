@@ -1,6 +1,6 @@
-import { Snippet, Statistics } from './search-item.model';
+import { ISnippet, IStatistics } from './search-item.model';
 
-export interface Video {
-  statistics: Statistics;
-  snippet: Snippet;
+export interface IVideo {
+  statistics: IStatistics;
+  snippet: ISnippet;
 }

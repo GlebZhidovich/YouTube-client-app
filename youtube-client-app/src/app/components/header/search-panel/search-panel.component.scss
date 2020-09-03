@@ -3,6 +3,10 @@
   flex-direction: column;
 }
 
+app-sort-panel {
+  overflow: hidden;
+}
+
 .search-panel,
 .user-login {
   display: flex;
@@ -28,7 +32,7 @@
     width: 50%;
   }
 
-  .setting-btn svg{
+  .setting-btn img{
     vertical-align: middle;
   }
 }

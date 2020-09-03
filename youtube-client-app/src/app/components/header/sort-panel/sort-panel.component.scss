@@ -1,4 +1,4 @@
-@import "../../../vars";
+@import "../../../../styles/vars";
 
 .sort-panel {
   display: flex;
@@ -22,13 +22,9 @@
   &__item {
     display: flex;
     align-items: center;
-    margin-left: 10px;
+    margin-left: 20px;
     color: $secondary-text-color;
     cursor: pointer;
-  }
-
-  &__input {
-    margin-left: 10px;
   }
 
   .selected {
