@@ -10,13 +10,14 @@ import { IVideo } from '../../shared/models/search-response.model';
 export class DataService {
 
   private videosData: IVideo[];
+  private apiKey: string = 'AIzaSyBhdQAgLeAYO2Tey3oeoWZ2KAUu4asq_Fk';
 
   constructor(
     private http: HttpClient,
   ) { }
 
   public loadVideo(name: string): Observable<IVideo[] | []> {
-    return this.http.get(`https://www.googleapis.com/youtube/v3/search?key=AIzaSyBhdQAgLeAYO2Tey3oeoWZ2KAUu4asq_Fk&type=video&maxResults=15&q=${name}`)
+    return this.http.get(`https://www.googleapis.com/youtube/v3/search?key=${this.apiKey}&type=video&maxResults=15&q=${name}`)
       .pipe(
         switchMap((data: {items: IVideo[]}): Observable<object> => from(data.items)),
         map((obj: {id: {videoId: string}}): string => obj.id.videoId),
@@ -32,7 +33,7 @@ export class DataService {
   }
 
   public loadVideoData(group: string): Observable<Object> {
-    return this.http.get(`https://www.googleapis.com/youtube/v3/videos?key=AIzaSyBhdQAgLeAYO2Tey3oeoWZ2KAUu4asq_Fk&id=${group}&part=snippet,statistics`);
+    return this.http.get(`https://www.googleapis.com/youtube/v3/videos?key=${this.apiKey}&id=${group}&part=snippet,statistics`);
   }
 
   public getVideoData(): Observable<IVideo[]> {

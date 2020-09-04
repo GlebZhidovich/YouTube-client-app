@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { capitalize } from '../../../shared/shared';
 
-enum sorting {
+enum Sorting {
   up = 'up',
   down = 'down',
 }
@@ -14,8 +14,8 @@ enum sorting {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SortPanelComponent {
-  private date: string = sorting.up;
-  private view: string = sorting.up;
+  private date: string = Sorting.up;
+  private view: string = Sorting.up;
   public isDate: boolean = false;
   public isView: boolean = false;
   public isWord: boolean = false;
@@ -27,7 +27,7 @@ export class SortPanelComponent {
     if (!this[`is${capitalize(type)}`]) {
       this[`is${capitalize(type)}`] = !this[`is${capitalize(type)}`];
     }
-    this[type] = this[type] === sorting.up ? sorting.down : sorting.up;
+    this[type] = this[type] === Sorting.up ? Sorting.down : Sorting.up;
     this.router.navigate(['/youtube'], {
       queryParams: {
         [type]: this[type],

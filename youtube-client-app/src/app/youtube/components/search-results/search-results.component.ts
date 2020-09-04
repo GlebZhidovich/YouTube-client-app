@@ -68,10 +68,7 @@ export class SearchResultsComponent implements  OnInit {
         if (name === 'videoName') {
           this.setVideosData(value);
         }
-        if (name === 'date' ||
-            name === 'view' ||
-            name === 'word'
-          ) {
+        if (['date', 'view', 'word'].includes(name)) {
           this.sortBy([name, value]);
         }
       });
