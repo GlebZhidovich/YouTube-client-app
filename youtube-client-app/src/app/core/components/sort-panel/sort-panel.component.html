@@ -10,12 +10,12 @@
       <li (click)="sortBy('view')" [ngClass]="{selected: isView}" class="sort-panel__item">
         count of view
       </li>
-      <li (click)="sortByWord($event, input)" [ngClass]="{selected: isWord}" class="sort-panel__item">
+      <li class="sort-panel__item">
         by word or sentence
       </li>
       <li class="sort-panel__item">
         <mat-form-field class="sort-panel__input">
-          <input (keypress)="sortByWord($event, input)" #input matInput placeholder="Word or sentence">
+          <input #input matInput placeholder="Word or sentence">
         </mat-form-field>
       </li>
     </ul>

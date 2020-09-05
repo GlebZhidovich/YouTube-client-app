@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../material.module';
 import { VideoDatePipe } from './pipes/video-date.pipe';
 
 @NgModule({
@@ -8,7 +10,14 @@ import { VideoDatePipe } from './pipes/video-date.pipe';
   ],
   imports: [
     CommonModule,
+    MaterialModule,
+    RouterModule,
   ],
-  exports: [VideoDatePipe],
+  exports: [
+    RouterModule,
+    CommonModule,
+    MaterialModule,
+    VideoDatePipe,
+  ],
 })
 export class SharedModule { }

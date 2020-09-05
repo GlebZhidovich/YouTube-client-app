@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { capitalize } from '../../../shared/shared';
 
 enum Sorting {
@@ -13,12 +15,16 @@ enum Sorting {
   styleUrls: ['./sort-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SortPanelComponent {
+export class SortPanelComponent implements OnInit, OnDestroy {
   private date: string = Sorting.up;
   private view: string = Sorting.up;
   public isDate: boolean = false;
   public isView: boolean = false;
   public isWord: boolean = false;
+  private sort$: Subscription;
+
+  @ViewChild('input', {static: true})
+  private inputRef: ElementRef;
 
   constructor(private router: Router) {
   }
@@ -35,15 +41,28 @@ export class SortPanelComponent {
     });
   }
 
-  public sortByWord(event: MouseEvent | KeyboardEvent, name: HTMLInputElement): void {
-    if (
-      (event instanceof MouseEvent || event.key === 'Enter')
-    ) {
-      this.router.navigate(['/youtube'], {
-        queryParams: {
-          word: name.value,
+  public sortByWord(value: string): void {
+    this.router.navigate(['/youtube'], {
+      queryParams: {
+        word: value,
+      },
+    });
+  }
+
+  public ngOnInit(): void {
+    this.sort$ = fromEvent(this.inputRef.nativeElement, 'keyup')
+      .pipe(
+        map((event: KeyboardEvent): string => (event.target as HTMLInputElement).value),
+        distinctUntilChanged(),
+      )
+      .subscribe(
+        (value: string): void => {
+          this.sortByWord(value);
         },
-      });
-    }
+      );
+  }
+
+  public ngOnDestroy(): void  {
+    this.sort$.unsubscribe();
   }
 }

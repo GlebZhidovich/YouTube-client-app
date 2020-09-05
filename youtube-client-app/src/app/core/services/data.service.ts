@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable, of } from 'rxjs';
-import { catchError, map, reduce, switchMap } from 'rxjs/operators';
+import { from, of, Observable } from 'rxjs';
+import { catchError, map, reduce, switchMap, tap } from 'rxjs/operators';
 import { IVideo } from '../../shared/models/search-response.model';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class DataService {
     private http: HttpClient,
   ) { }
 
-  public loadVideo(name: string): Observable<IVideo[] | []> {
+  public loadVideo(name: string): Observable<IVideo[]> {
     return this.http.get(`https://www.googleapis.com/youtube/v3/search?key=${this.apiKey}&type=video&maxResults=15&q=${name}`)
       .pipe(
         switchMap((data: {items: IVideo[]}): Observable<object> => from(data.items)),
@@ -25,9 +25,8 @@ export class DataService {
         switchMap((group: string): Observable<Object> => this.loadVideoData(group)),
         map((data: {items: IVideo[]}): IVideo[] => data.items),
         catchError((err: string): [] => []),
-        map((data: [] | IVideo[]): [] | IVideo[] => {
+        tap((data: [] | IVideo[]): void => {
           this.videosData = data;
-          return data;
         }),
       );
   }

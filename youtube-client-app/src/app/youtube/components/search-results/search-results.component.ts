@@ -10,20 +10,14 @@ import { DataService } from '../../../core/services/data.service';
 import { IVideo } from '../../../shared/models/search-response.model';
 import { capitalize } from '../../../shared/shared';
 
-interface ITypes {
-  date(type: string, name: string): string;
-  word(type: string, name: string): string;
-  view(type: string, name: string): string;
-}
-
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchResultsComponent implements  OnInit {
-  public videosData: Observable<IVideo[] | []>;
+export class SearchResultsComponent implements OnInit {
+  public videosData: Observable<IVideo[]>;
   public videoName: string;
   public sort: string;
   public sortWord: string;
@@ -43,20 +37,11 @@ export class SearchResultsComponent implements  OnInit {
   }
 
   public sortBy(arr: [string, string]): void {
-    const sort: (type: string, name: string) => string =
-      (type: string, name: string): string =>  this[`sort${capitalize(type)}`] = name;
-    const types: ITypes = {
-      date: sort,
-      word: sort,
-      view: sort,
-    };
     const [type, name]: [string, string] = arr;
-    if (arr && this.videosData) {
-      if (types.hasOwnProperty(type)) {
-        types[type](type, name);
-      }
-      this.cdr.detectChanges();
-    }
+    const sort: (type: string, name: string) => string =
+      (type: string, name: string): string => this[`sort${capitalize(type)}`] = name;
+    sort(type, name);
+    this.cdr.detectChanges();
   }
 
   public ngOnInit(): void {

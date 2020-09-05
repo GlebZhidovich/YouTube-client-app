@@ -36,10 +36,8 @@ const routes: Routes = [
     SortByViewPipe,
   ],
   imports: [
-    CommonModule,
-    MaterialModule,
-    RouterModule.forChild(routes),
     SharedModule,
+    RouterModule.forChild(routes),
   ],
 })
 export class YoutubeModule { }
