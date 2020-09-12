@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
@@ -9,10 +8,7 @@ import { AuthService } from '../../../shared/services/auth.service';
 })
 export class LoginComponent {
 
-  public isAuth: Observable<boolean>;
-
-  constructor(private auth: AuthService) {
-    this.isAuth = auth.isAuthenticated();
+  constructor(public authService: AuthService) {
   }
 
 }

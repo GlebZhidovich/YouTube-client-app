@@ -50,16 +50,18 @@ export class SortPanelComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.sort$ = fromEvent(this.inputRef.nativeElement, 'keyup')
-      .pipe(
-        map((event: KeyboardEvent): string => (event.target as HTMLInputElement).value),
-        distinctUntilChanged(),
-      )
-      .subscribe(
-        (value: string): void => {
-          this.sortByWord(value);
-        },
-      );
+    if (this.inputRef) {
+      this.sort$ = fromEvent(this.inputRef.nativeElement, 'keyup')
+        .pipe(
+          map((event: KeyboardEvent): string => (event.target as HTMLInputElement).value),
+          distinctUntilChanged(),
+        )
+        .subscribe(
+          (value: string): void => {
+            this.sortByWord(value);
+          },
+        );
+    }
   }
 
   public ngOnDestroy(): void  {

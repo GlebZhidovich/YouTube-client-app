@@ -1,5 +1,13 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
@@ -34,7 +42,7 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
   private searchElem: ElementRef<HTMLInputElement>;
 
   constructor(private router: Router,
-    private authService: AuthService) {}
+    public authService: AuthService) {}
 
   public isFilterShow(): void {
     if (this.authService.getIsAuth()) {
@@ -53,18 +61,20 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.search$ = fromEvent(this.searchElem.nativeElement, 'keyup')
-      .pipe(
-        debounceTime(700),
-        map((event: KeyboardEvent): string  => (event.target as HTMLInputElement).value),
-        filter((str: string): boolean => str.length > 2),
-        distinctUntilChanged(),
-      )
-      .subscribe({
-        next: (name: string): void => {
+    if (this.searchElem) {
+      this.search$ = fromEvent(this.searchElem.nativeElement, 'keyup')
+        .pipe(
+          debounceTime(700),
+          map((event: KeyboardEvent): string  => (event.target as HTMLInputElement).value),
+          filter((str: string): boolean => str.length > 2),
+          distinctUntilChanged(),
+        )
+        .subscribe({
+          next: (name: string): void => {
             this.searchVideo(name);
           },
-      });
+        });
+    }
   }
 
   public ngOnDestroy(): void {

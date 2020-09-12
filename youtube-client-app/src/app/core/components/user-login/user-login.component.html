@@ -10,4 +10,11 @@
     </div>
   </div>
 
+  <button
+    *ngIf="authService.isAuth | async"
+    (click)="authService.logout()"
+    mat-raised-button
+    color="primary">Logout
+  </button>
+
 </div>
