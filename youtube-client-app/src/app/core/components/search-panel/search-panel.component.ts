@@ -9,8 +9,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { IVideosState } from '../../../redux/reducers/videos.reducer';
 import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({

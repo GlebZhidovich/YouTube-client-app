@@ -1,6 +1,6 @@
 <div class="search-result">
   <app-search-item
-    *ngFor="let videoData of videosData | async | sortByName : sortWord | sortByDate : sortDate | sortByView : sortView"
-    [videoData]="videoData"
+    *ngFor="let video of videos$ | async | sortByName : sortWord | sortByDate : sortDate | sortByView : sortView"
+    [videoData]="video"
   ></app-search-item>
 </div>

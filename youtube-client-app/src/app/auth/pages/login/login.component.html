@@ -22,8 +22,8 @@
       <button
         *ngIf="!(authService.isAuth | async)"
         (click)="authService.login()"
-        mat-raised-button
-        color="primary">Login</button>
+        mat-raised-button>Login
+      </button>
     </mat-card-actions>
   </mat-card>
 

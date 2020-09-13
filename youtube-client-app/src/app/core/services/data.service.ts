@@ -25,7 +25,7 @@ export class DataService {
         switchMap((group: string): Observable<Object> => this.loadVideoData(group)),
         map((data: {items: IVideo[]}): IVideo[] => data.items),
         catchError((err: string): [] => []),
-        tap((data: [] | IVideo[]): void => {
+        tap((data: IVideo[]): void => {
           this.videosData = data;
         }),
       );

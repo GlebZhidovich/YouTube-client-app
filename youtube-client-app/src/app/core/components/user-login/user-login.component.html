@@ -1,6 +1,8 @@
 <div class="user-login">
 
-  <div routerLink="/auth" class="user-login__wrap">
+  <div
+    routerLink="/auth"
+    class="user-login__wrap">
     <p class="user-login__title">
       User Name
     </p>
@@ -13,8 +15,15 @@
   <button
     *ngIf="authService.isAuth | async"
     (click)="authService.logout()"
-    mat-raised-button
-    color="primary">Logout
+    class="user-login__btn"
+    mat-raised-button>Logout
+  </button>
+
+  <button
+    *ngIf="authService.isAuth | async"
+    routerLink="/admin"
+    class="user-login__btn"
+    mat-raised-button>Admin
   </button>
 
 </div>

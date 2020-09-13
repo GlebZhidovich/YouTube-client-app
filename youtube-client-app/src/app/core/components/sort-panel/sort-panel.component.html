@@ -4,10 +4,16 @@
     <p class="sort-panel__title">Sorting by:</p>
 
     <ul class="sort-panel__list">
-      <li (click)="sortBy('date')" [ngClass]="{selected: isDate}" class="sort-panel__item">
+      <li
+        (click)="sortBy('date')"
+        [ngClass]="{selected: isDate}"
+        class="sort-panel__item">
         date
       </li>
-      <li (click)="sortBy('view')" [ngClass]="{selected: isView}" class="sort-panel__item">
+      <li
+        (click)="sortBy('view')"
+        [ngClass]="{selected: isView}"
+        class="sort-panel__item">
         count of view
       </li>
       <li class="sort-panel__item">
@@ -15,7 +21,10 @@
       </li>
       <li class="sort-panel__item">
         <mat-form-field class="sort-panel__input">
-          <input #input matInput placeholder="Word or sentence">
+          <input
+            #input
+            matInput
+            placeholder="Word or sentence">
         </mat-form-field>
       </li>
     </ul>

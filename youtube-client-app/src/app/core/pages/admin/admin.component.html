@@ -1,0 +1,35 @@
+<mat-card class="admin__wrap">
+  <mat-card-header>
+    <mat-card-title>Create new card</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="admin__form">
+      <br>
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput type="text" name="title">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput type="text" name="description">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Img</mat-label>
+        <input matInput type="text" name="img">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Video link</mat-label>
+        <input matInput type="text" name="link">
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      (click)="saveCustomCard()"
+      mat-raised-button>Create card
+    </button>
+  </mat-card-actions>
+</mat-card>
