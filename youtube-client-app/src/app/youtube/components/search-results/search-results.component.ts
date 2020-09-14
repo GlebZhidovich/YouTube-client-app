@@ -8,10 +8,10 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { DataService } from '../../../core/services/data.service';
-import { VideosNameAction } from '../../../redux/actions/videos.actions';
+import { VideosSearchAction } from '../../../redux/actions/videos.actions';
 import { IVideosState } from '../../../redux/reducers/videos.reducer';
-import { selectVideos } from '../../../redux/selectors/videos.selectors';
-import { IVideo } from '../../../shared/models/search-response.model';
+import { selectCustomVideos, selectVideos } from '../../../redux/selectors/videos.selectors';
+import { ICustomVideo, IVideo } from '../../../shared/models/search-response.model';
 import { capitalize } from '../../../shared/shared';
 
 @Component({
@@ -22,6 +22,7 @@ import { capitalize } from '../../../shared/shared';
 })
 export class SearchResultsComponent implements OnInit {
   public videos$: Observable<IVideo[]> = this.store$.pipe(select(selectVideos));
+  public customVideos$: Observable<ICustomVideo[]> = this.store$.pipe(select(selectCustomVideos));
   public videoName: string;
   public sort: string;
   public sortWord: string;
@@ -48,7 +49,7 @@ export class SearchResultsComponent implements OnInit {
     this.router.queryParams.subscribe((params: Params): void => {
       Object.entries(params).forEach(([name, value]: [string, string]): void => {
         if (name === 'videoName') {
-          this.store$.dispatch(new VideosNameAction({
+          this.store$.dispatch(new VideosSearchAction({
             name: value,
           }));
         }

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchPanelComponent } from './components/search-panel/search-panel.component';
@@ -18,6 +19,7 @@ import { ErrorComponent } from './pages/error/error.component';
   ],
   imports: [
     SharedModule,
+    ReactiveFormsModule,
   ],
   exports: [
     ErrorComponent,

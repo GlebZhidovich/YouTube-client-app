@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { VideosAddCustomAction } from '../../../redux/actions/videos.actions';
+import { IVideosState } from '../../../redux/reducers/videos.reducer';
+import { ICustomVideo } from '../../../shared/models/search-response.model';
 
 @Component({
   selector: 'app-admin',
@@ -9,9 +13,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AdminComponent implements OnInit {
   public customCardForm: FormGroup;
 
+  constructor(private state$: Store<IVideosState>) {
+  }
+
   public saveCustomCard(): void {
     if (this.customCardForm.valid) {
-      console.log(this.customCardForm.value);
+      this.customCardForm.get('date').setValue(`${new Date()}`);
+      const video: ICustomVideo = (this.customCardForm.value as ICustomVideo);
+      this.state$.dispatch(new VideosAddCustomAction({
+        video,
+      }));
     }
   }
 
@@ -21,7 +32,7 @@ export class AdminComponent implements OnInit {
       description: new FormControl('', [Validators.required]),
       imgLink: new FormControl('', [Validators.required]),
       videoLink: new FormControl('', [Validators.required]),
-      date: new FormControl('', [Validators.required]),
+      date: new FormControl(''),
     });
   }
 

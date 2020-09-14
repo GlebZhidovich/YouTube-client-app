@@ -1,13 +1,14 @@
 import { Action } from '@ngrx/store';
-import { IVideo } from '../../shared/models/search-response.model';
+import { ICustomVideo, IVideo } from '../../shared/models/search-response.model';
 
 export enum videosActionsType {
-  name = '[VIDEOS] name',
+  search = '[VIDEOS] search',
   load = '[VIDEOS] load',
+  addCustom = '[VIDEOS] add custom',
 }
 
-export class VideosNameAction implements Action {
-  public readonly type: string = videosActionsType.name;
+export class VideosSearchAction implements Action {
+  public readonly type: string = videosActionsType.search;
 
   constructor(public payload: {
     name: string
@@ -24,4 +25,13 @@ export class VideosLoadAction implements Action {
   }
 }
 
-export type VideosActions = VideosLoadAction | VideosNameAction;
+export class VideosAddCustomAction implements Action {
+  public readonly type: string = videosActionsType.addCustom;
+
+  constructor(public payload: {
+    video: ICustomVideo
+  }) {
+  }
+}
+
+export type VideosActions = VideosLoadAction | VideosSearchAction | VideosAddCustomAction;

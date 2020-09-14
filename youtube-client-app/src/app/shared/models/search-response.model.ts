@@ -5,3 +5,11 @@ export interface IVideo {
   statistics: IStatistics;
   snippet: ISnippet;
 }
+
+export interface ICustomVideo {
+  title: string;
+  description: string;
+  imgLink: string;
+  videoLink: string;
+  date: string;
+}

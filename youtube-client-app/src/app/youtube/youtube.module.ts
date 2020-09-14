@@ -11,6 +11,7 @@ import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { SortByDatePipe } from './pipes/sort-by-date.pipe';
 import { SortByNamePipe } from './pipes/sort-by-name.pipe';
 import { SortByViewPipe } from './pipes/sort-by-view.pipe';
+import { CustomSearchItemComponent } from './components/custom-search-item/custom-search-item.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
     CustomDatePipe,
     SortByDatePipe,
     SortByViewPipe,
+    CustomSearchItemComponent,
   ],
   imports: [
     SharedModule,

@@ -15,7 +15,7 @@ export class VideosEffects {
   @Effect()
   public load(): Observable<any> {
     return this.action$.pipe(
-      ofType(videosActionsType.name),
+      ofType(videosActionsType.search),
       map((data: {payload: { name: string } }): string => data.payload.name),
       mergeMap((name: string): Observable<Object> => this.dataService.loadVideo(name)),
       map((data: IVideo[]): VideosLoadAction => new VideosLoadAction({

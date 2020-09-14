@@ -3,32 +3,45 @@
     <mat-card-title>Create new card</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form class="admin__form">
+    <form class="admin__form"[formGroup]="customCardForm">
       <br>
       <mat-form-field>
         <mat-label>Title</mat-label>
-        <input matInput type="text" name="title">
+        <input matInput type="text" name="title" formControlName="title">
+        <mat-error *ngIf="customCardForm.get('title').hasError('required')">
+          Title is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
       <br>
       <mat-form-field>
         <mat-label>Description</mat-label>
-        <input matInput type="text" name="description">
+        <input matInput type="text" name="description" formControlName="description">
+        <mat-error *ngIf="customCardForm.get('description').hasError('required')">
+          Description is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
       <br>
       <mat-form-field>
         <mat-label>Img</mat-label>
-        <input matInput type="text" name="img">
+        <input matInput type="text" name="img" formControlName="imgLink">
+        <mat-error *ngIf="customCardForm.get('imgLink').hasError('required')">
+          Image link is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
       <br>
       <mat-form-field>
         <mat-label>Video link</mat-label>
-        <input matInput type="text" name="link">
+        <input matInput type="text" name="link" formControlName="videoLink">
+        <mat-error *ngIf="customCardForm.get('videoLink').hasError('required')">
+          Video link is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
     </form>
   </mat-card-content>
   <mat-card-actions>
     <button
       (click)="saveCustomCard()"
+      [disabled]="customCardForm.invalid"
       mat-raised-button>Create card
     </button>
   </mat-card-actions>
