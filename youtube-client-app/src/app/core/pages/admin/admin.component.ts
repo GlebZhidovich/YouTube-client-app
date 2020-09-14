@@ -13,14 +13,14 @@ import { ICustomVideo } from '../../../shared/models/search-response.model';
 export class AdminComponent implements OnInit {
   public customCardForm: FormGroup;
 
-  constructor(private state$: Store<IVideosState>) {
+  constructor(private store$: Store<IVideosState>) {
   }
 
   public saveCustomCard(): void {
     if (this.customCardForm.valid) {
       this.customCardForm.get('date').setValue(`${new Date()}`);
       const video: ICustomVideo = (this.customCardForm.value as ICustomVideo);
-      this.state$.dispatch(new VideosAddCustomAction({
+      this.store$.dispatch(new VideosAddCustomAction({
         video,
       }));
     }
