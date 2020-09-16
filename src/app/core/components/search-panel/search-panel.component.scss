@@ -1,0 +1,43 @@
+:host {
+  flex: 2;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-panel,
+.user-login {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.search-panel {
+
+  .play-btn,
+  .setting-btn {
+    cursor: pointer;
+    outline: none;
+
+    @media screen and (max-width: 350px) {
+      display: none;
+    }
+  }
+
+  .play-btn,
+  .search-field,
+  .search-btn,
+  .setting-btn {
+    margin-right: 20px;
+  }
+
+  .search-field {
+    width: 50%;
+  }
+
+  .setting-btn img{
+    vertical-align: middle;
+  }
+}

@@ -1,0 +1,68 @@
+<div *ngIf="videoData" class="card__wrap">
+  <mat-card
+    class="card"
+    style="filter: drop-shadow(5px 10px 10px {{videoData.snippet.publishedAt | videoDate}})"
+  >
+
+    <div class="card__aside">
+      <img
+        class="card__img" [src]="videoData.snippet.thumbnails.standard.url"
+        alt="Picture">
+    </div>
+
+    <mat-card-content
+      class="card__content"
+      [ngStyle]="{
+        'border-bottom-color': videoData.snippet.publishedAt | videoDate
+    }">
+
+      <div class="card__header">
+        <h2 class="card__title">
+          {{videoData.snippet.title}}
+        </h2>
+        <p class="card__date">
+          {{videoData.snippet.publishedAt | customDate}}
+        </p>
+      </div>
+
+      <div class="card__body">
+        <h3 class="card__subtitle">
+          Description:
+        </h3>
+        <p class="card__description">
+          {{videoData.snippet.description}}
+        </p>
+      </div>
+
+      <div class="card__footer">
+        <ul class="card__info-list">
+
+          <li class="card__info-item">
+            <img src="../../../../assets/img/viewed.svg" alt="view">
+            <span class="card__info-num">{{videoData.statistics.viewCount}}</span>
+          </li>
+          <li class="card__info-item">
+            <img src="../../../../assets/img/liked.svg" alt="like">
+            <span class="card__info-num">{{videoData.statistics.likeCount}}</span>
+          </li>
+          <li class="card__info-item">
+            <img src="../../../../assets/img/dislike.svg" alt="dislike">
+            <span class="card__info-num">{{videoData.statistics.dislikeCount}}</span>
+          </li>
+          <li class="card__info-item">
+            <img src="../../../../assets/img/comments.svg" alt="comments">
+            <span class="card__info-num">{{videoData.statistics.commentCount}}</span>
+          </li>
+
+        </ul>
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+  <div
+    [routerLink]="['/youtube']"
+    class="card__btn"
+    [ngStyle]="{'background-color': videoData.snippet.publishedAt | videoDate}"
+  ></div>
+</div>

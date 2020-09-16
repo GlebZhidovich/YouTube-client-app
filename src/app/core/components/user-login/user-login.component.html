@@ -1,0 +1,29 @@
+<div class="user-login">
+
+  <div
+    routerLink="/auth"
+    class="user-login__wrap">
+    <p class="user-login__title">
+      User Name
+    </p>
+
+    <div class="user-login__img">
+      <img src="../../../../assets/img/login.svg" alt="user">
+    </div>
+  </div>
+
+  <button
+    *ngIf="authService.isAuth | async"
+    (click)="authService.logout()"
+    class="user-login__btn"
+    mat-raised-button>Logout
+  </button>
+
+  <button
+    *ngIf="authService.isAuth | async"
+    routerLink="/admin"
+    class="user-login__btn"
+    mat-raised-button>Admin
+  </button>
+
+</div>

@@ -1,0 +1,36 @@
+<div class="container">
+  <div
+
+    class="search-panel">
+
+    <div
+      class="play-btn"
+      [routerLink]="['/youtube']">
+      <img src="../../../../assets/img/logo.svg" alt="play">
+    </div>
+
+    <mat-form-field
+      *ngIf="authService.isAuth | async"
+      class="search-field"
+    >
+      <input
+        appSearch
+        matInput
+        placeholder="Name">
+    </mat-form-field>
+
+    <div
+      *ngIf="authService.isAuth | async"
+      class="setting-btn"
+      (click)="isFilterShow()">
+      <img src="../../../../assets/img/search_settings.svg" alt="settings">
+    </div>
+
+  </div>
+
+  <app-sort-panel
+    [@open-close]
+    *ngIf="isFilter">
+  </app-sort-panel>
+
+</div>

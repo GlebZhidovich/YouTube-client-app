@@ -1,0 +1,17 @@
+@import "../../../../styles/vars";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px;
+  background-color: $primary-color;
+
+  &-item {
+    flex: 1;
+
+    @media screen and (max-width: 350px) {
+      display: none;
+    }
+  }
+}

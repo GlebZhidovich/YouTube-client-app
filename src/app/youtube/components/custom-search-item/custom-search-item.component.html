@@ -1,0 +1,20 @@
+<div class="search-item">
+  <mat-card class="card" [ngStyle]="{'border-color': videoData.date | videoDate}">
+
+    <div class="card__figure">
+      <a [href]="videoData.videoLink" target="_blank">
+        <img class="card__img" mat-card-image [src]="videoData.imgLink" alt="Picture">
+      </a>
+    </div>
+
+    <mat-card-content class="card__content">
+
+     <h3 class="card__title">{{videoData.title}}</h3>
+
+     <p class="card__description">{{videoData.description}}</p>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

@@ -1,0 +1,43 @@
+<div class="search-item">
+  <mat-card class="card" [ngStyle]="{'border-color': snippet.publishedAt | videoDate}">
+
+    <div class="card__figure">
+      <img class="card__img" mat-card-image [src]="snippet.thumbnails.medium.url" alt="Picture">
+    </div>
+
+    <mat-card-content class="card__content">
+
+      <ul class="card__info-list">
+
+        <li class="card__info-item">
+          <img src="../../../../assets/img/viewed.svg" alt="view">
+          <span class="card__info-num">{{statistics.viewCount}}</span>
+        </li>
+        <li class="card__info-item">
+          <img src="../../../../assets/img/liked.svg" alt="like">
+          <span class="card__info-num">{{statistics.likeCount}}</span>
+        </li>
+        <li class="card__info-item">
+          <img src="../../../../assets/img/dislike.svg" alt="dislike">
+          <span class="card__info-num">{{statistics.dislikeCount}}</span>
+        </li>
+        <li class="card__info-item">
+          <img src="../../../../assets/img/comments.svg" alt="comments">
+          <span class="card__info-num">{{statistics.commentCount}}</span>
+        </li>
+
+      </ul>
+
+      <h3 class="card__title">{{snippet.title}}</h3>
+
+    </mat-card-content>
+
+    <mat-card-actions class="card__footer">
+
+      <button [routerLink]="['/youtube', videoData.id]" mat-button>more...</button>
+
+    </mat-card-actions>
+
+  </mat-card>
+
+</div>

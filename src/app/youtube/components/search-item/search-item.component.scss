@@ -1,0 +1,60 @@
+@import "../../../../styles/vars";
+
+:host {
+  cursor: pointer;
+}
+
+.search-item {
+  padding: 14px;
+  box-sizing: border-box;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 263px;
+  height: 365px;
+  box-sizing: border-box;
+  border-bottom: 5px solid;
+
+  &__info {
+
+    &-list {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 0;
+      margin: 0 0 10px;
+      list-style-type: none;
+    }
+
+    &-item {
+      & img{
+        margin-right: 5px;
+        vertical-align: -1px;
+      }
+    }
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__title {
+    max-height: 90px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: right;
+    color: $card-title-color;
+    overflow: auto;
+  }
+
+  &__footer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+}
