@@ -2,13 +2,14 @@ import { Action } from '@ngrx/store';
 import { ICustomVideo, IVideo } from '../../shared/models/search-response.model';
 
 export enum videosActionsType {
-  search = '[VIDEOS] search',
   load = '[VIDEOS] load',
+  success = '[VIDEOS] search',
+  error = '[VIDEOS] error',
   addCustom = '[VIDEOS] add custom',
 }
 
-export class VideosSearchAction implements Action {
-  public readonly type: string = videosActionsType.search;
+export class VideosLoadAction implements Action {
+  public readonly type: string = videosActionsType.load;
 
   constructor(public payload: {
     name: string
@@ -16,11 +17,20 @@ export class VideosSearchAction implements Action {
   }
 }
 
-export class VideosLoadAction implements Action {
-  public readonly type: string = videosActionsType.load;
+export class VideosLoadSuccessAction implements Action {
+  public readonly type: string = videosActionsType.success;
 
   constructor(public payload: {
-    videos: IVideo[]
+    videos: IVideo []
+  }) {
+  }
+}
+
+export class VideosLoadFailedAction implements Action {
+  public readonly type: string = videosActionsType.error;
+
+  constructor(public payload: {
+    error: string
   }) {
   }
 }
@@ -34,4 +44,7 @@ export class VideosAddCustomAction implements Action {
   }
 }
 
-export type VideosActions = VideosLoadAction | VideosSearchAction | VideosAddCustomAction;
+export type VideosActions = VideosLoadAction
+  | VideosLoadSuccessAction
+  | VideosLoadFailedAction
+  | VideosAddCustomAction;

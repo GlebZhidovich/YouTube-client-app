@@ -1,5 +1,7 @@
 <div class="search-result">
 
+  <mat-progress-bar *ngIf="loading$ | async" mode="indeterminate"></mat-progress-bar>
+
   <app-custom-search-item
     *ngFor="let video of customVideos$ | async"
     [videoData]="video"

@@ -1,6 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import {
-  AfterViewChecked,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -9,10 +8,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
-import { IVideosState } from '../../../redux/reducers/videos.reducer';
 import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
@@ -36,15 +33,10 @@ import { AuthService } from '../../../shared/services/auth.service';
     ]),
   ],
 })
-export class SearchPanelComponent implements OnInit, OnDestroy {
+export class SearchPanelComponent {
   public isFilter: boolean = false;
-  private search$: Subscription;
 
-  @ViewChild('search', {static: true})
-  private searchElem: ElementRef<HTMLInputElement>;
-
-  constructor(private router: Router,
-    public authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 
   public isFilterShow(): void {
     if (this.authService.getIsAuth()) {
@@ -52,34 +44,4 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  private searchVideo(value: string): void {
-    if (this.authService.getIsAuth()) {
-      this.router.navigate(['/youtube'], {
-        queryParams: {
-          videoName: value,
-        },
-      });
-    }
-  }
-
-  public ngOnInit(): void {
-    if (this.searchElem) {
-      this.search$ = fromEvent(this.searchElem.nativeElement, 'keyup')
-        .pipe(
-          debounceTime(700),
-          map((event: KeyboardEvent): string  => (event.target as HTMLInputElement).value),
-          filter((str: string): boolean => str.length > 2),
-          distinctUntilChanged(),
-        )
-        .subscribe({
-          next: (name: string): void => {
-            this.searchVideo(name);
-          },
-        });
-    }
-  }
-
-  public ngOnDestroy(): void {
-    this.search$.unsubscribe();
-  }
 }

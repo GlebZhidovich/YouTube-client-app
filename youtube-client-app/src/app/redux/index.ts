@@ -1,12 +1,9 @@
 import {
-  createFeatureSelector,
-  createSelector,
-  ActionReducer,
   ActionReducerMap,
   MetaReducer,
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-import { videosNode, videosReducer, IVideosState } from './reducers/videos.reducer';
+import { videosReducer, IVideosState } from './reducers/videos.reducer';
 
 export interface IState {
   videos: IVideosState;

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { throwError, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IVideosState } from '../../../redux/reducers/videos.reducer';
 import { selectVideos } from '../../../redux/selectors/videos.selectors';
@@ -28,7 +28,13 @@ export class DetailedInformationComponent implements OnInit, OnDestroy {
       const { id }: { id: string } = params;
       this.video$ = this.store$.pipe(
         select(selectVideos),
-        map((arr: IVideo[]): IVideo => arr.find((el: IVideo): boolean => el.id === id)),
+        map((arr: IVideo[]): IVideo => {
+          const video: IVideo = arr.find((el: IVideo): boolean => el.id === id);
+          if (!video) {
+            throw new Error('Video not find');
+          }
+          return video;
+        }),
       ).subscribe({
         next: (value: IVideo): void => {
           this.videoData = value;

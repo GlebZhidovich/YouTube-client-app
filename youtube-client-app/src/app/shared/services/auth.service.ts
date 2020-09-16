@@ -30,8 +30,10 @@ export class AuthService {
     return new Observable((subscriber: Subscriber<boolean>): TeardownLogic => {
       if (localStorage.getItem('auth')) {
         subscriber.next(true);
+        this.isAuth.next(true);
       } else {
         subscriber.next(false);
+        this.isAuth.next(false);
       }
       subscriber.complete();
     }).pipe(

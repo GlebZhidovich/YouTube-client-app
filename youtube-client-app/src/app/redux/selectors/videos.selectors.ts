@@ -14,3 +14,13 @@ export const selectCustomVideos: MemoizedSelector<object, ICustomVideo[]> = crea
   selectVideosFeature,
   (state: IVideosState): ICustomVideo[] => state.customVideos,
 );
+
+export const selectLoading: MemoizedSelector<object, boolean> = createSelector(
+  selectVideosFeature,
+  (state: IVideosState): boolean => state.loading,
+);
+
+export const selectError: MemoizedSelector<object, string> = createSelector(
+  selectVideosFeature,
+  (state: IVideosState): string => state.error,
+);

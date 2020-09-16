@@ -1,16 +1,22 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component,
+  Component, OnDestroy,
   OnInit,
 } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DataService } from '../../../core/services/data.service';
-import { VideosSearchAction } from '../../../redux/actions/videos.actions';
+import { VideosLoadAction } from '../../../redux/actions/videos.actions';
 import { IVideosState } from '../../../redux/reducers/videos.reducer';
-import { selectCustomVideos, selectVideos } from '../../../redux/selectors/videos.selectors';
+import {
+  selectCustomVideos,
+  selectError,
+  selectLoading,
+  selectVideos,
+} from '../../../redux/selectors/videos.selectors';
 import { ICustomVideo, IVideo } from '../../../shared/models/search-response.model';
 import { capitalize } from '../../../shared/shared';
 
@@ -20,7 +26,9 @@ import { capitalize } from '../../../shared/shared';
   styleUrls: ['./search-results.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchResultsComponent implements OnInit {
+export class SearchResultsComponent implements OnInit, OnDestroy {
+  public error$: Subscription;
+  public loading$: Observable<boolean> = this.store$.pipe(select(selectLoading));
   public videos$: Observable<IVideo[]> = this.store$.pipe(select(selectVideos));
   public customVideos$: Observable<ICustomVideo[]> = this.store$.pipe(select(selectCustomVideos));
   public videoName: string;
@@ -33,6 +41,7 @@ export class SearchResultsComponent implements OnInit {
     private router: ActivatedRoute,
     private cdr: ChangeDetectorRef,
     private dataService: DataService,
+    private snackBar: MatSnackBar,
     private store$: Store<IVideosState>,
   ) {
   }
@@ -45,11 +54,24 @@ export class SearchResultsComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
+  private openSnackBar(message: string, action: string): void {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
   public ngOnInit(): void {
+    this.error$ = this.store$.pipe(select(selectError)).subscribe({
+      next: (message: string): void => {
+        if (message) {
+          this.openSnackBar(message, 'error');
+        }
+      },
+    });
     this.router.queryParams.subscribe((params: Params): void => {
       Object.entries(params).forEach(([name, value]: [string, string]): void => {
         if (name === 'videoName') {
-          this.store$.dispatch(new VideosSearchAction({
+          this.store$.dispatch(new VideosLoadAction({
             name: value,
           }));
         }
@@ -58,5 +80,9 @@ export class SearchResultsComponent implements OnInit {
         }
       });
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.error$.unsubscribe();
   }
 }
